@@ -72,7 +72,6 @@ const LeftSide = () => {
   useEffect(() => {
     if (address && ethers.utils.isAddress(address)) {
       const fetchBalances = async () => {
-        console.log('not cache')
         try {
           let cachedAddressBalances = cachedBalances.current[address]
 
@@ -112,7 +111,6 @@ const LeftSide = () => {
 
       const cachedAddressBalances = cachedBalances.current[address]
       if (cachedAddressBalances) {
-        console.log(cachedAddressBalances.dai.toString())
         setBalances([
           cachedAddressBalances.dai.toString(),
           cachedAddressBalances.usdc.toString(),

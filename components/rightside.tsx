@@ -16,7 +16,6 @@ const checkBalances = (balances: number[]) => {
 }
 
 const RightSide = () => {
-  console.log(process.env)
   const { setAddress, balances } = useEthContext()
   const address = useInput('')
   const [isValid, setIsValid] = useState<boolean>(false)
@@ -24,6 +23,12 @@ const RightSide = () => {
   const postBalances = () => {
     if (checkBalances(balances) === false) return
     service.post(address.value, balances)
+  }
+
+  const ValidNotify = () => {
+    if (!isValid && address.value)
+      return <span className="self-end text-red-500">Please Provide a vaild address.</span>
+    return <span className="self-end text-red-500"></span>
   }
 
   return (
@@ -37,7 +42,7 @@ const RightSide = () => {
         <span>Address</span>
         <textarea
           placeholder="0x2655..0aa9"
-          className="rounded-md resize-none h-20 lining-nums bg-[#202124] border-none outline-none"
+          className="rounded-md resize-none h-15 lining-nums bg-[#202124] border-none outline-none"
           spellCheck="false"
           value={address.value}
           onChange={(e) => {
@@ -46,11 +51,12 @@ const RightSide = () => {
             setIsValid(ethers.utils.isAddress(e.target.value))
           }}
         ></textarea>
+        <ValidNotify />
       </div>
 
       <button
         disabled={!address.value || !isValid || !balances.length || !checkBalances(balances)}
-        className="ease-in-out bg-[#202124] h-12 rounded-xl hover:ease-in hover:duration-100 hover:bg-[#57585d] active:bg-[#2c2d30] active:ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed ..."
+        className="ease-in-out bg-[#3e4046] h-12 rounded-xl hover:ease-in hover:duration-100 hover:bg-[#57585d] active:bg-[#2c2d30] active:ease-in-out duration-300 disabled:opacity-50 disabled:cursor-not-allowed ..."
         onClick={() => {
           postBalances()
         }}
@@ -62,16 +68,3 @@ const RightSide = () => {
 }
 
 export default RightSide
-
-//   {
-//     tag: 'Curve.fi: DAI/USDC/USDT Pool',
-//     address: '0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7',
-//   },
-//   {
-//     tag: 'Compound: cDAI Token',
-//     address: '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643',
-//   },
-//   {
-//     tag: 'Aave: aDAI Token V2',
-//     address: '0x028171bca77440897b824ca71d1c56cac55b68a3',
-//   },

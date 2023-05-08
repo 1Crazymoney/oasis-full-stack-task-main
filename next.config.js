@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
-const { parsed: localEnv } = require('dotenv').config()
-
 module.exports = {
+  reactStrictMode: true,
   env: {
-    customKey: 'my-value',
+    SERVER_URL: 'http://localhost:5000/balances',
   },
 }
