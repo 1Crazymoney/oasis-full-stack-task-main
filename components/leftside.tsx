@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { getMainnetSdk } from '@dethcrypto/eth-sdk-client'
 import { ethers } from 'ethers'
 import Image from 'next/image'
-import { useAddressContext } from '../contexts/addressContext'
+import { useEthContext } from '../contexts/ethContext'
 
 const items = [
   { name: 'DAI', src: '/dai_circle_color.svg' },
@@ -20,16 +20,21 @@ const { dai, USDC, MKR } = getMainnetSdk(defaultSigner)
 const tokenBalances = async (
   address: string,
   setBalances: React.Dispatch<React.SetStateAction<string[]>>,
+  setTokens: (c: number[]) => void,
 ) => {
-  const daiBalance = await dai.balanceOf(address)
-  const usdcBalance = await USDC.balanceOf(address)
-  const makerBalance = await MKR.balanceOf(address)
+  try {
+    const daiBalance = await dai.balanceOf(address)
+    const usdcBalance = await USDC.balanceOf(address)
+    const makerBalance = await MKR.balanceOf(address)
 
-  setBalances([
-    ethers.utils.formatUnits(daiBalance.toString(), 18),
-    ethers.utils.formatUnits(usdcBalance.toString(), 18),
-    ethers.utils.formatUnits(makerBalance.toString(), 18),
-  ])
+    const d = parseInt(ethers.utils.formatUnits(daiBalance.toString(), 18))
+    const u = parseInt(ethers.utils.formatUnits(usdcBalance.toString(), 18))
+    const m = parseInt(ethers.utils.formatUnits(makerBalance.toString(), 18))
+    setBalances([d.toString(), u.toString(), m.toString()])
+    setTokens([d, u, m])
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 type ItemProps = {
@@ -46,7 +51,13 @@ const Item = (props: ItemProps) => {
         <span>{items[id].name}</span>
       </div>
       <div className="flex gap-x-3 w-full">
-        <input className="bg-transparent text-right w-full" type="text" value={balance} readOnly />
+        <input
+          className="bg-transparent text-right w-full"
+          type="text"
+          value={balance}
+          placeholder="---"
+          readOnly
+        />
         <p>{items[id].name}</p>
       </div>
     </div>
@@ -54,11 +65,16 @@ const Item = (props: ItemProps) => {
 }
 
 const LeftSide = () => {
-  const { address } = useAddressContext()
+  const { address, setBalances: setTokens } = useEthContext()
   const [balances, setBalances] = useState<string[]>(['', '', ''])
 
   useEffect(() => {
-    if (address) tokenBalances(address, setBalances)
+    if (address && ethers.utils.isAddress(address)) {
+      tokenBalances(address, setBalances, setTokens)
+    } else {
+      setBalances(['', '', ''])
+      setTokens([])
+    }
   }, [address])
 
   return (

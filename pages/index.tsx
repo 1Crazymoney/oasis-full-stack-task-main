@@ -3,19 +3,20 @@ import { useState } from 'react'
 import Header from '../components/header'
 import Body from '../components/body'
 import Wrapper from '../components/wrapper'
-import { useAddressContext, addressContext } from '../contexts/addressContext'
+import { ethContext } from '../contexts/ethContext'
 
 const Home: NextPage = () => {
   const [address, setAddress] = useState<string>('')
+  const [balances, setBalances] = useState<number[]>([])
   return (
-    <addressContext.Provider value={{ address, setAddress }}>
+    <ethContext.Provider value={{ address, setAddress, balances, setBalances }}>
       <div className="flex justify-center min-h-screen bg-[rgb(17,18,22)] min-w-min">
         <Wrapper>
           <Header />
           <Body />
         </Wrapper>
       </div>
-    </addressContext.Provider>
+    </ethContext.Provider>
   )
 }
 
