@@ -16,6 +16,7 @@ const checkBalances = (balances: number[]) => {
 }
 
 const RightSide = () => {
+  console.log(process.env)
   const { setAddress, balances } = useEthContext()
   const address = useInput('')
   const [isValid, setIsValid] = useState<boolean>(false)

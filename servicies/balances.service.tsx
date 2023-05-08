@@ -1,6 +1,7 @@
-const server_url = 'http://localhost:5000/balances'
+const server_url = process.env.SERVER_URL || 'http://localhost:5000/balances'
 
 export const post = async (address: string, balances: number[]) => {
+  console.log(process.env.SERVER_URL)
   const payload = {
     address: address,
     balances: [

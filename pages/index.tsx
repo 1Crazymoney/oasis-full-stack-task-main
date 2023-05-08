@@ -8,6 +8,7 @@ import { ethContext } from '../contexts/ethContext'
 const Home: NextPage = () => {
   const [address, setAddress] = useState<string>('')
   const [balances, setBalances] = useState<number[]>([])
+
   return (
     <ethContext.Provider value={{ address, setAddress, balances, setBalances }}>
       <div className="flex justify-center min-h-screen bg-[rgb(17,18,22)] min-w-min">
