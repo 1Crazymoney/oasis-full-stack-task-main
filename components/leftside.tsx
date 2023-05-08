@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { getMainnetSdk } from '@dethcrypto/eth-sdk-client'
 import { ethers } from 'ethers'
 import Image from 'next/image'
+
 import { useEthContext } from '../contexts/ethContext'
 
 const infuraProjectId = 'd9034025e9b94714bd497b25c64078ed'

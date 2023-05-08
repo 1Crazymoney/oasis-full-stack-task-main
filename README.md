@@ -14,6 +14,14 @@ USDC: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
 MKR:	0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2
 ```
 
+Sample addresses:
+
+```
+address: '0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7'
+address: '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643'
+address: '0x028171bca77440897b824ca71d1c56cac55b68a3'
+```
+
 ## Functions
 
 - The ability to get token balances from Ethereum Network
@@ -22,10 +30,9 @@ MKR:	0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2
 ## Environment Setup
 
 1. Install Node: https://nodejs.org/en/download/
-2. Install deps by running `npm install` or `yarn install`
-3. Start the app with `npm run dev` or `yarn dev`
-
-###
+2. Install deps by running `yarn install`
+3. Install Ethereum SDKs by running `yarn eth-sdk`
+4. Start the app with `yarn dev`
 
 If all went well, you should be able to access the app at
 [http://localhost:3000/](http://localhost:3000/).
