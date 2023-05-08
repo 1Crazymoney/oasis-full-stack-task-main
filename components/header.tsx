@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+
 import OasisLogo from '../public/oasis-icon-152x152.png'
 
 const Header = () => {
@@ -10,11 +11,11 @@ const Header = () => {
           <Image src={OasisLogo.src} alt="OasisLogo" className="w-full" layout="fill" />
         </div>
         <div className="flex flex-col py-6 bg-[rgb(32,33,36)] px-40 rounded-2xl">
-          <h1 className="text-4xl truncate ...">Stein Divine</h1>
-          <span className="ps-5">Oazo Apps full stack candidate</span>
+          <h1 className="text-4xl truncate ...">Dorin Manea</h1>
+          <span>Oazo Apps full stack candidate</span>
           <div className="flex flex-row pt-5 text-sm">
-            <a target="_blank" href="https://github.com/SteinDivine/SteinDivine">
-              divine.stein718@gmail.com
+            <a target="_blank" href="https://github.com/intelliseawolf">
+              intelliseawolf103@gmail.com
             </a>
           </div>
         </div>
